@@ -31,29 +31,13 @@
     </transition>
     <transition name="getStoreSalesReps">
         <actions>
-            <entity-find-count entity-name="mantle.product.store.ProductStoreParty" count-field="financeManagerCount">
+            <entity-find entity-name="mkdecision.dashboard.ProductStorePartyDetail" list="storePartyList">
+                <econdition field-name="productStoreId"/>
                 <econdition field-name="partyId" from="ec.user.userAccount.partyId"/>
-                <econdition field-name="roleTypeId" value="FinanceManager"/>
+                <econdition field-name="roleTypeId" operator="in" value="SalesRepresentative,FinanceManager"/>
                 <date-filter/>
-            </entity-find-count>
-
-            <if condition="financeManagerCount > 0">
-                <entity-find entity-name="mkdecision.dashboard.ProductStorePartyDetail" list="storePartyList">
-                    <econdition field-name="productStoreId"/>
-                    <econdition field-name="roleTypeId" value="SalesRepresentative"/>
-                    <date-filter/>
-                    <select-field field-name="partyId,firstName,lastName"/>
-                </entity-find>
-                <else>
-                    <entity-find entity-name="mkdecision.dashboard.ProductStorePartyDetail" list="storePartyList">
-                        <econdition field-name="productStoreId"/>
-                        <econdition field-name="partyId" from="ec.user.userAccount.partyId"/>
-                        <econdition field-name="roleTypeId" value="SalesRepresentative"/>
-                        <date-filter/>
-                        <select-field field-name="partyId,firstName,lastName"/>
-                    </entity-find>
-                </else>
-            </if>
+                <select-field field-name="partyId,firstName,lastName"/>
+            </entity-find>
 
             <set field="resultList" from="[]"/>
             <iterate list="storePartyList" entry="storeParty">
