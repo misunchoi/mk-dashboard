@@ -121,25 +121,16 @@ class OrderServices {
             return
         }
 
-        // validate sales representative
+        // validate representative
         String userPartyId = uf.getUserAccount().getString("partyId")
-        long financeManagerCount = ef.find("mantle.product.store.ProductStoreParty")
+        long representativeCount = ef.find("mantle.product.store.ProductStoreParty")
                 .condition("productStoreId", productStoreId)
                 .condition("partyId", userPartyId)
-                .condition("roleTypeId", "FinanceManager")
                 .conditionDate("fromDate", "thruDate", uf.getNowTimestamp())
                 .count()
-        if (financeManagerCount > 0) {
-            long salesRepCount = ef.find("mantle.product.store.ProductStoreParty")
-                    .condition("productStoreId", productStoreId)
-                    .condition("partyId", salesRepresentativeId)
-                    .condition("roleTypeId", "SalesRepresentative")
-                    .conditionDate("fromDate", "thruDate", uf.getNowTimestamp())
-                    .count()
-            if (salesRepCount == 0) {
-                mf.addError(lf.localize("DASHBOARD_INVALID_SALES_REP"))
-                return
-            }
+        if (representativeCount == 0) {
+            mf.addError(lf.localize("DASHBOARD_INVALID_SALES_REP"))
+            return
         } else if (salesRepresentativeId != userPartyId) {
             mf.addError(lf.localize("DASHBOARD_INVALID_SALES_REP"))
             return

@@ -441,7 +441,7 @@
                 </row-actions>
                 <field name="roleType">
                     <default-field title="Role" container-style="">
-                        <display text="${roleType.description}"/>
+                        <display text="Representative"/>
                     </default-field>
                 </field>
                 <field name="partyName">

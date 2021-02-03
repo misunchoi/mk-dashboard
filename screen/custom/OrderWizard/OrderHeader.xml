@@ -155,14 +155,6 @@
             <set field="salesChannelEnumId" from="orderHeader?.salesChannelEnumId ?: ''"/>
             <set field="productStoreId" from="orderHeader?.productStoreId ?: ''"/>
 
-            <entity-find entity-name="mantle.order.OrderPartParty" list="salesRepresentativeList">
-                <econdition field-name="orderId" from="orderId"/>
-                <econdition field-name="orderPartSeqId" from="orderPartSeqId"/>
-                <econdition field-name="roleTypeId" value="SalesRepresentative"/>
-                <order-by field-name="-lastUpdatedStamp"/>
-            </entity-find>
-            <set field="salesRepresentativeId" from="salesRepresentativeList?.getFirst()?.partyId ?: ''"/>
-
             <entity-find entity-name="mantle.order.OrderItem" list="orderItemList">
                 <econdition field-name="orderId" from="orderId"/>
                 <econdition field-name="orderPartSeqId" from="orderPartSeqId"/>
