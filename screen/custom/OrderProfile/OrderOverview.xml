@@ -124,20 +124,40 @@
         </entity-find>
 
         <if condition="ec.user.hasPermission('MK_DASHBOARD_ORDER_NOTES_VIEW_INTERNAL')">
-            <entity-find-related value-field="orderHeader" relationship-name="notes" list="noteList"/>
+            <entity-find entity-name="moqui.security.UserGroupAndMember" list="currentUserGroups">
+                <econdition field-name="userId" from="ec.user.userId"/>
+                <date-filter/>
+            </entity-find>
+            <entity-find entity-name="moqui.security.UserGroupAndMember" list="matchingUserGroups">
+                <econdition field-name="userGroupId" operator="in" from="currentUserGroups?.userGroupId"/>
+                <date-filter/>
+            </entity-find>
+
+            <entity-find entity-name="mantle.order.OrderNote" list="noteList">
+                <econdition field-name="orderId" from="orderId"/>
+                <econditions combine="or">
+                    <!-- Show public notes to all users -->
+                    <econditions combine="or">
+                        <econdition field-name="internalNote" operator="is-null" value=""/>
+                        <econdition field-name="internalNote" value="N"/>
+                        <econdition field-name="internalNote" value=""/>
+                    </econditions>
+                    <econditions combine="and">
+                        <!-- Show private notes created by the same user group -->
+                        <econdition field-name="internalNote" value="Y"/>
+                        <econdition field-name="userId" operatore="in" from="matchingUserGroups?.userId"/>
+                    </econditions>
+                </econditions>
+            </entity-find>
+            
             <else>
+                <!-- Show public notes to all users -->
                 <entity-find entity-name="mantle.order.OrderNote" list="noteList">
                     <econdition field-name="orderId" from="orderId"/>
                     <econditions combine="or">
-                        <econditions combine="or">
-                            <econdition field-name="internalNote" operator="is-null" value=""/>
-                            <econdition field-name="internalNote" value="N"/>
-                            <econdition field-name="internalNote" value=""/>
-                        </econditions>
-                        <econditions combine="and">
-                            <econdition field-name="internalNote" value="Y"/>
-                            <econdition field-name="userId" from="ec.user.userId"/>
-                        </econditions>
+                        <econdition field-name="internalNote" operator="is-null" value=""/>
+                        <econdition field-name="internalNote" value="N"/>
+                        <econdition field-name="internalNote" value=""/>
                     </econditions>
                 </entity-find>
             </else>
