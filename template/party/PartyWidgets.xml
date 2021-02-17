@@ -103,8 +103,8 @@
                                 <set field="jobTitle" from="employmentRelation.relationshipName"/>
                                 <set field="employmentStatusEnumId" from="employmentStatusSetting?.settingValue"/>
                                 <set field="monthlyIncome" from="monthlyIncomeFinFlowList?.getFirst()?.amount ?: null"/>
-                                <set field="fromDate" from="ec.l10n.format(employmentRelation.fromDate, 'MM-dd-yyyy') ?: null"/>
-                                <set field="toDate" from="ec.l10n.format(employmentRelation.thruDate, 'MM-dd-yyyy') ?: null"/>
+                                <set field="fromDate" from="ec.l10n.format(monthlyIncomeFinFlowList?.getFirst()?.fromDate, 'MM-dd-yyyy') ?: null"/>
+                                <set field="toDate" from="ec.l10n.format(monthlyIncomeFinFlowList?.getFirst()?.thruDate, 'MM-dd-yyyy') ?: null"/>
                                 <set field="employerContactNumber" from="telecomNumberResp.contactNumber"/>
                                 <set field="employerAddress1" from="postalAddressResp.postalAddress?.address1"/>
                                 <set field="employerUnitNumber" from="postalAddressResp.postalAddress?.unitNumber"/>
@@ -556,8 +556,8 @@
                         <set field="employmentStatusEnumId" from="employmentStatusSetting?.settingValue"/>
                         <set field="monthlyIncome" from="monthlyIncomeFinFlowList?.getFirst()?.amount ?: null"/>
                         <set field="jobTitle" from="employmentRelation.relationshipName"/>
-                        <set field="fromDate" from="ec.l10n.format(employmentRelation.fromDate, 'MM-dd-yyyy')"/>
-                        <set field="toDate" from="ec.l10n.format(employmentRelation.thruDate, 'MM-dd-yyyy')"/>
+                        <set field="fromDate" from="ec.l10n.format(monthlyIncomeFinFlowList?.getFirst()?.fromDate, 'MM-dd-yyyy')"/>
+                        <set field="toDate" from="ec.l10n.format(monthlyIncomeFinFlowList?.getFirst()?.thruDate, 'MM-dd-yyyy')"/>
                         <set field="employerContactNumber" from="telecomNumberResp.contactNumber"/>
                         <set field="employerPostalAddress" from="postalAddressResp.postalAddressString"/>
                         <set field="employerAddress1" from="postalAddressResp.postalAddress?.address1"/>
@@ -588,11 +588,11 @@
                                 </container-row>
                                 <container-row>
                                     <row-col lg="3" md="3" sm="4" xs="12" style="padding-all-0"><label text="From Date" style="text-light-grey"/></row-col>
-                                    <row-col lg="9" md="9" sm="8" xs="12" style="padding-all-0"><label text="${ec.l10n.format(employmentRelation.fromDate, 'MM-dd-yyyy') ?: ''}"/></row-col>
+                                    <row-col lg="9" md="9" sm="8" xs="12" style="padding-all-0"><label text="${ec.l10n.format(fromDate, 'MM-dd-yyyy') ?: ''}"/></row-col>
                                 </container-row>
                                 <container-row>
                                     <row-col lg="3" md="3" sm="4" xs="12" style="padding-all-0"><label text="To Date" style="text-light-grey"/></row-col>
-                                    <row-col lg="9" md="9" sm="8" xs="12" style="padding-all-0"><label text="${ec.l10n.format(employmentRelation.thruDate, 'MM-dd-yyyy') ?: ''}"/></row-col>
+                                    <row-col lg="9" md="9" sm="8" xs="12" style="padding-all-0"><label text="${ec.l10n.format(toDate, 'MM-dd-yyyy') ?: ''}"/></row-col>
                                 </container-row>
                                 <container-row>
                                     <row-col lg="3" md="3" sm="4" xs="12" style="padding-all-0"><label text="Occupation" style="text-light-grey"/></row-col>
