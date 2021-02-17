@@ -213,6 +213,7 @@
                         <econdition field-name="fromPartyId" from="party.partyId"/>
                         <econdition field-name="fromRoleTypeId" value="Employee"/>
                         <order-by field-name="fromDate"/>
+                        <date-filter/>
                     </entity-find>
 
                     <set field="firstName" from="partyDetail?.firstName ?: null"/>

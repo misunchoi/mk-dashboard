@@ -23,7 +23,7 @@
                                 <entity-find entity-name="mk.close.FinancialFlow" list="monthlyIncomeFinFlowList">
                                     <econdition field-name="partyId" from="employmentRelation.fromPartyId"/>
                                     <econdition field-name="entryTypeEnumId" value="MkEntryIncome"/>
-                                    <econdition field-name="financialFlowTypeEnumId" value="MkFinFlowTotalMonthlyIncome"/>
+                                    <econdition field-name="financialFlowTypeEnumId" value="MkFinFlowWage"/>
                                     <econdition field-name="partyRelationshipId" from="employmentRelation.partyRelationshipId"/>
                                 </entity-find>
                                 <service-call name="mkdecision.dashboard.PartyServices.get#PrimaryTelecomNumber" in-map="[partyId: employmentRelation.toPartyId]" out-map="telecomNumberResp"/>
@@ -92,7 +92,7 @@
                                 <entity-find entity-name="mk.close.FinancialFlow" list="monthlyIncomeFinFlowList">
                                     <econdition field-name="partyId" from="employmentRelation.fromPartyId"/>
                                     <econdition field-name="entryTypeEnumId" value="MkEntryIncome"/>
-                                    <econdition field-name="financialFlowTypeEnumId" value="MkFinFlowTotalMonthlyIncome"/>
+                                    <econdition field-name="financialFlowTypeEnumId" value="MkFinFlowWage"/>
                                     <econdition field-name="partyRelationshipId" from="employmentRelation.partyRelationshipId"/>
                                 </entity-find>
                                 <service-call name="mkdecision.dashboard.PartyServices.get#PrimaryTelecomNumber" in-map="[partyId: employmentRelation.toPartyId]" out-map="telecomNumberResp"/>
@@ -429,7 +429,7 @@
                         <entity-find entity-name="mk.close.FinancialFlow" list="monthlyIncomeFinFlowList">
                             <econdition field-name="partyId" from="employmentRelation.fromPartyId"/>
                             <econdition field-name="entryTypeEnumId" value="MkEntryIncome"/>
-                            <econdition field-name="financialFlowTypeEnumId" value="MkFinFlowTotalMonthlyIncome"/>
+                            <econdition field-name="financialFlowTypeEnumId" value="MkFinFlowWage"/>
                             <econdition field-name="partyRelationshipId" from="employmentRelation.partyRelationshipId"/>
                         </entity-find>
                         <service-call name="mkdecision.dashboard.PartyServices.get#PrimaryTelecomNumber" in-map="[partyId: employmentRelation.toPartyId]" out-map="telecomNumberResp"/>
@@ -545,7 +545,7 @@
                         <entity-find entity-name="mk.close.FinancialFlow" list="monthlyIncomeFinFlowList">
                             <econdition field-name="partyId" from="employmentRelation.fromPartyId"/>
                             <econdition field-name="entryTypeEnumId" value="MkEntryIncome"/>
-                            <econdition field-name="financialFlowTypeEnumId" value="MkFinFlowTotalMonthlyIncome"/>
+                            <econdition field-name="financialFlowTypeEnumId" value="MkFinFlowWage"/>
                             <econdition field-name="partyRelationshipId" from="employmentRelation.partyRelationshipId"/>
                         </entity-find>
                         <service-call name="mkdecision.dashboard.PartyServices.get#PrimaryTelecomNumber" in-map="[partyId: employmentRelation.toPartyId]" out-map="telecomNumberResp"/>
