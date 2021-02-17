@@ -845,7 +845,6 @@ class PartyServices {
                 .parameter("toPartyId", employerPartyId)
                 .parameter("toRoleTypeId", "OrgEmployer")
                 .parameter("fromDate", fromDate)
-                .parameter("thruDate", toDate)
                 .parameter("relationshipName", jobTitle)
                 .call()
         String partyRelationshipId = employmentRelationshipResp.get("partyRelationshipId")
@@ -865,6 +864,7 @@ class PartyServices {
                 .parameter("financialFlowTypeEnumId", "MkFinFlowTotalMonthlyIncome")
                 .parameter("amount", monthlyIncome)
                 .parameter("fromDate", fromDate.getTime())
+                .parameter("thruDate", toDate.getTime())
                 .call()
 
         // return the output parameters
@@ -1002,7 +1002,6 @@ class PartyServices {
         Map<String, Object> employmentRelationshipResp = sf.sync().name("update#mantle.party.PartyRelationship")
                 .parameter("partyRelationshipId", partyRelationshipId)
                 .parameter("fromDate", fromDate.getTime())
-                .parameter("thruDate", toDate)
                 .parameter("relationshipName", jobTitle)
                 .call()
 
@@ -1025,6 +1024,7 @@ class PartyServices {
                 .parameter("financialFlowId", monthlyIncomeFinFlow.getString("financialFlowId"))
                 .parameter("amount", monthlyIncome)
                 .parameter("fromDate", fromDate.getTime())
+                .parameter("thruDate", toDate.getTime())
                 .call()
 
         // return the output parameters
