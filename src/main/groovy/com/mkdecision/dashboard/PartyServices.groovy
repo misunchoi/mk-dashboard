@@ -856,15 +856,19 @@ class PartyServices {
                 .parameter("settingValue", employmentStatusEnumId)
                 .call()
 
+        // add dataSourceId to previous employments to determine whether to show from/thru dates or years/months
+        String dataSourceId = StringUtils.equals(relationshipTypeEnumId, "PrtPreviousEmployee") ? "MkPrevEmploymentDate" : null
+
         // create monthly income
         sf.sync().name("create#mk.close.FinancialFlow")
                 .parameter("partyId", partyId)
                 .parameter("partyRelationshipId", partyRelationshipId)
+                .parameter("dataSourceId", dataSourceId)
                 .parameter("entryTypeEnumId", "MkEntryIncome")
                 .parameter("financialFlowTypeEnumId", "MkFinFlowWage")
                 .parameter("amount", monthlyIncome)
                 .parameter("fromDate", fromDate.getTime())
-                .parameter("thruDate", toDate.getTime())
+                .parameter("thruDate", toDate ? toDate.getTime() : null)
                 .call()
 
         // return the output parameters
@@ -1020,11 +1024,16 @@ class PartyServices {
                 .condition("financialFlowTypeEnumId", "MkFinFlowWage")
                 .list()
                 .getFirst()
+        
+        // add dataSourceId to previous employments to determine whether to show from/thru dates or years/months
+        String dataSourceId = StringUtils.equals(relationshipTypeEnumId, "PrtPreviousEmployee") ? "MkPrevEmploymentDate" : null
+
         sf.sync().name("update#mk.close.FinancialFlow")
                 .parameter("financialFlowId", monthlyIncomeFinFlow.getString("financialFlowId"))
+                .parameter("dataSourceId", dataSourceId)
                 .parameter("amount", monthlyIncome)
                 .parameter("fromDate", fromDate.getTime())
-                .parameter("thruDate", toDate.getTime())
+                .parameter("thruDate", toDate ? toDate.getTime() : null)
                 .call()
 
         // return the output parameters
