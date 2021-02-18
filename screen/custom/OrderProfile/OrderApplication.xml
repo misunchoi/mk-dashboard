@@ -211,7 +211,11 @@
                     <entity-find entity-name="mantle.party.PartyToAndRelationship" list="previousEmploymentRelationList">
                         <econdition field-name="relationshipTypeEnumId" value="PrtPreviousEmployee"/>
                         <econdition field-name="fromPartyId" from="party.partyId"/>
-                        <econdition field-name="fromRoleTypeId" value="Employee"/>
+                        <econditions combine="or">
+                            <econdition field-name="fromRoleTypeId" value="Employee"/>
+                            <econdition field-name="fromRoleTypeId" operator="is-null" value=""/>
+                            <econdition field-name="fromRoleTypeId" value=""/>
+                        </econditions>
                         <order-by field-name="fromDate"/>
                         <date-filter/>
                     </entity-find>
