@@ -34,7 +34,7 @@
                                 <set field="jobTitle" from="employmentRelation.relationshipName"/>
                                 <set field="employmentStatusEnumId" from="employmentStatusSetting?.settingValue"/>
                                 <set field="monthlyIncome" from="monthlyIncomeFinFlowList?.getFirst()?.amount ?: null"/>
-                                <set field="millis" from="Math.abs(employmentRelation.fromDate.getTime() - ec.user.nowTimestamp.getTime())"/>
+                                <set field="millis" from="Math.abs(monthlyIncomeFinFlowList?.getFirst()?.fromDate.getTime() - ec.user.nowTimestamp.getTime())"/>
                                 <set field="days" from="java.util.concurrent.TimeUnit.DAYS.convert(millis, java.util.concurrent.TimeUnit.MILLISECONDS)"/>
                                 <set field="years" from="Math.floor(days / 365)" type="Integer"/>
                                 <set field="months" from="Math.floor(days / 30.4) - (years * 12)" type="Integer"/>
@@ -440,7 +440,7 @@
                         <set field="jobTitle" from="employmentRelation.relationshipName"/>
                         <set field="employmentStatusEnumId" from="employmentStatusSetting?.settingValue"/>
                         <set field="monthlyIncome" from="monthlyIncomeFinFlowList?.getFirst()?.amount ?: null"/>
-                        <set field="millis" from="Math.abs(employmentRelation.fromDate.getTime() - ec.user.nowTimestamp.getTime())"/>
+                        <set field="millis" from="Math.abs(monthlyIncomeFinFlowList?.getFirst()?.fromDate.getTime() - ec.user.nowTimestamp.getTime())"/>
                         <set field="days" from="java.util.concurrent.TimeUnit.DAYS.convert(millis, java.util.concurrent.TimeUnit.MILLISECONDS)"/>
                         <set field="years" from="Math.floor(days / 365)" type="Integer"/>
                         <set field="months" from="Math.floor(days / 30.4) - (years * 12)" type="Integer"/>
