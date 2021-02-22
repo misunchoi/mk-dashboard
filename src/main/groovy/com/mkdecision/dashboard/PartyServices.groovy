@@ -857,7 +857,7 @@ class PartyServices {
                 .call()
 
         // add dataSourceId to previous employments to determine whether to show from/thru dates or years/months
-        String dataSourceId = StringUtils.equals(relationshipTypeEnumId, "PrtPreviousEmployee") ? "MkPrevEmploymentDate" : null
+        String dataSourceId = StringUtils.equals(relationshipTypeEnumId, "PrtPreviousEmployee") ? "ShowFromThruDate" : null
 
         // create monthly income
         sf.sync().name("create#mk.close.FinancialFlow")
@@ -1026,7 +1026,7 @@ class PartyServices {
                 .getFirst()
         
         // add dataSourceId to previous employments to determine whether to show from/thru dates or years/months
-        String dataSourceId = StringUtils.equals(relationshipTypeEnumId, "PrtPreviousEmployee") ? "MkPrevEmploymentDate" : null
+        String dataSourceId = StringUtils.equals(relationshipTypeEnumId, "PrtPreviousEmployee") ? "ShowFromThruDate" : null
 
         sf.sync().name("update#mk.close.FinancialFlow")
                 .parameter("financialFlowId", monthlyIncomeFinFlow.getString("financialFlowId"))
