@@ -56,7 +56,6 @@
                 <econdition field-name="fromRoleTypeId" value=""/>
             </econditions>
             <order-by field-name="fromDate"/>
-            <date-filter/>
         </entity-find>
     </actions>
 

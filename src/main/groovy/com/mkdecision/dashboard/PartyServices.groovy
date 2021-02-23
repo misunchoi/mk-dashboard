@@ -845,7 +845,9 @@ class PartyServices {
                 .parameter("toPartyId", employerPartyId)
                 .parameter("toRoleTypeId", "OrgEmployer")
                 .parameter("fromDate", fromDate)
+                .parameter("thruDate", toDate)
                 .parameter("relationshipName", jobTitle)
+                .parameter("statusId", "VerifiedEmployee")
                 .call()
         String partyRelationshipId = employmentRelationshipResp.get("partyRelationshipId")
 
@@ -856,19 +858,15 @@ class PartyServices {
                 .parameter("settingValue", employmentStatusEnumId)
                 .call()
 
-        // add dataSourceId to previous employments to determine whether to show from/thru dates or years/months
-        String dataSourceId = StringUtils.equals(relationshipTypeEnumId, "PrtPreviousEmployee") ? "ShowFromThruDate" : null
-
         // create monthly income
         sf.sync().name("create#mk.close.FinancialFlow")
                 .parameter("partyId", partyId)
                 .parameter("partyRelationshipId", partyRelationshipId)
-                .parameter("dataSourceId", dataSourceId)
                 .parameter("entryTypeEnumId", "MkEntryIncome")
                 .parameter("financialFlowTypeEnumId", "MkFinFlowWage")
                 .parameter("amount", monthlyIncome)
                 .parameter("fromDate", fromDate.getTime())
-                .parameter("thruDate", toDate ? toDate.getTime() : null)
+                .parameter("thruDate", toDate)
                 .call()
 
         // return the output parameters
@@ -1005,8 +1003,10 @@ class PartyServices {
         // update employment relation
         Map<String, Object> employmentRelationshipResp = sf.sync().name("update#mantle.party.PartyRelationship")
                 .parameter("partyRelationshipId", partyRelationshipId)
-                .parameter("fromDate", fromDate.getTime())
+                .parameter("fromDate", fromDate)
+                .parameter("thruDate", toDate)
                 .parameter("relationshipName", jobTitle)
+                .parameter("statusId", "VerifiedEmployee")
                 .call()
 
         // update employment status relationship setting
@@ -1024,16 +1024,12 @@ class PartyServices {
                 .condition("financialFlowTypeEnumId", "MkFinFlowWage")
                 .list()
                 .getFirst()
-        
-        // add dataSourceId to previous employments to determine whether to show from/thru dates or years/months
-        String dataSourceId = StringUtils.equals(relationshipTypeEnumId, "PrtPreviousEmployee") ? "ShowFromThruDate" : null
 
         sf.sync().name("update#mk.close.FinancialFlow")
                 .parameter("financialFlowId", monthlyIncomeFinFlow.getString("financialFlowId"))
-                .parameter("dataSourceId", dataSourceId)
                 .parameter("amount", monthlyIncome)
-                .parameter("fromDate", fromDate.getTime())
-                .parameter("thruDate", toDate ? toDate.getTime() : null)
+                .parameter("fromDate", fromDate)
+                .parameter("thruDate", toDate)
                 .call()
 
         // return the output parameters

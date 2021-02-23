@@ -65,7 +65,6 @@
                 <econdition field-name="fromRoleTypeId" operator="is-null" value=""/>
                 <econdition field-name="fromRoleTypeId" value=""/>
             </econditions>
-            <date-filter/>
             <order-by field-name="fromDate"/>
         </entity-find>
         <entity-find entity-name="mk.close.FinancialFlow" list="incomeFinFlowList">
