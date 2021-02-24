@@ -48,6 +48,7 @@
         <set field="orderEditable" from="editableOrderStatusCount > 0 &amp;&amp; (orderHeader.lockUserId == null || orderHeader.lockUserId == ec.user.userId)"/>
 
         <entity-find entity-name="mantle.party.PartyToAndRelationship" list="previousEmploymentRelationList">
+            <econdition field-name="statusId" value="VerifiedEmployee"/>
             <econdition field-name="relationshipTypeEnumId" value="PrtPreviousEmployee"/>
             <econdition field-name="fromPartyId" from="partyId"/>
             <econditions combine="or">

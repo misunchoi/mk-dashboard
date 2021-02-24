@@ -213,6 +213,7 @@
                         <econdition field-name="partyRelationshipId" operator="is-null" value=""/>
                     </entity-find>
                     <entity-find entity-name="mantle.party.PartyToAndRelationship" list="previousEmploymentRelationList">
+                        <econdition field-name="statusId" value="VerifiedEmployee"/>
                         <econdition field-name="relationshipTypeEnumId" value="PrtPreviousEmployee"/>
                         <econdition field-name="fromPartyId" from="party.partyId"/>
                         <econditions combine="or">
